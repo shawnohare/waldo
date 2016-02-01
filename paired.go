@@ -1,4 +1,4 @@
-package wald
+package waldo
 
 // PairedComparison tests whether two Bernoulli samples are drawn from
 // the same underlying distribution, utilizing a Wald test.  If X is the

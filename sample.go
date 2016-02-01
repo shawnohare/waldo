@@ -1,4 +1,4 @@
-package wald
+package waldo
 
 import "math"
 
