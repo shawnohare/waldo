@@ -2,16 +2,17 @@ package waldo
 
 import "math"
 
-// Wald is a size alpha simple two-sided statistical hypothesis test
+// Wald is a simple two-sided statistical hypothesis test
 // for a scalar parameter theta. It tests
 // H_0: theta = null vs. H_1: theta != null,
 // under the assumption that the estimator for theta is asymptotically
 // normal. Asymptotic normality is met by Bernoulli trials with the
 // maximum likelihood estimator, for instance.
+// A Wald test with Size S has a confidence level of 1 - S.
 type Wald struct {
-	Alpha float64 // Size of the test.
-	Null  float64 // Null value for the test.
-	zval  float64 // z_{alpha/2} value
+	Size float64
+	Null float64
+	zval float64
 }
 
 // Results is a container for the result of performing a Wald
@@ -31,7 +32,7 @@ type Result struct {
 // Compute the z_{alpha/2} value associated wit the test.
 func (t *Wald) z() float64 {
 	if t.zval == 0 {
-		t.zval = zalpha2(t.Alpha)
+		t.zval = zalpha2(t.Size)
 	}
 	return t.zval
 }
@@ -72,7 +73,7 @@ func (t Wald) Test(s Sample) Result {
 	return Result{
 		Statistic:          t.Statistic(cs),
 		ConfidenceInterval: t.ConfidenceInterval(cs),
-		ConfidenceLevel:    1 - t.Alpha,
+		ConfidenceLevel:    1 - t.Size,
 		Power:              t.Power(cs),
 		PValue:             t.PValue(cs),
 		RejectNull:         t.RejectNull(cs),
