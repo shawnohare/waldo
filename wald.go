@@ -39,7 +39,7 @@ func (t *Wald) z() float64 {
 
 // Statistic computes the test statistic for the sample.
 func (t Wald) Statistic(s Sample) float64 {
-	return (s.MLE() - t.Null) / StandardError(s)
+	return (s.Estimator() - t.Null) / StandardError(s)
 }
 
 func (t Wald) PValue(s Sample) float64 {
@@ -47,7 +47,7 @@ func (t Wald) PValue(s Sample) float64 {
 }
 
 func (t Wald) ConfidenceInterval(s Sample) []float64 {
-	estimate := s.MLE()
+	estimate := s.Estimator()
 	stdError := StandardError(s)
 	epsilon := stdError * t.z()
 	return []float64{estimate - epsilon, estimate + epsilon}
@@ -56,7 +56,7 @@ func (t Wald) ConfidenceInterval(s Sample) []float64 {
 // Power function estimate. The power
 // is the probability of correctly rejecting the null hypothesis.
 func (t Wald) Power(s Sample) float64 {
-	estimate := s.MLE()
+	estimate := s.Estimator()
 	stdError := StandardError(s)
 	z := t.z()
 	x := (t.Null - estimate) / stdError
@@ -69,7 +69,7 @@ func (t Wald) RejectNull(s Sample) bool {
 
 // Perform a Wald test on a sample of data.
 func (t Wald) Test(s Sample) Result {
-	cs := NewSample(s.MLE(), s.Variance()) // computed sample
+	cs := NewSample(s.Estimator(), s.Variance()) // computed sample
 	return Result{
 		Statistic:          t.Statistic(cs),
 		ConfidenceInterval: t.ConfidenceInterval(cs),

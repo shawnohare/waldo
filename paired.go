@@ -9,8 +9,8 @@ type PairedComparison struct {
 }
 
 // MLE estimate of the comparison estimator hat(p) := X.MLE() - Y.MLE()
-func (s PairedComparison) MLE() float64 {
-	return s.X.MLE() - s.Y.MLE()
+func (s PairedComparison) Estimator() float64 {
+	return s.X.Estimator() - s.Y.Estimator()
 }
 
 // StandardError estimates the standard deviation of the distribution

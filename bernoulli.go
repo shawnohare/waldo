@@ -20,7 +20,7 @@ type BernoulliSample struct {
 // iid from a Bernoulli distribution with unknown parameter p,
 // then the MLE (as a function) is simply (1/m)X, where m is the size
 // of the sample.
-func (s BernoulliSample) MLE() float64 {
+func (s BernoulliSample) Estimator() float64 {
 	if s.Trials <= 0 || s.Successes < 0 || s.Successes > s.Trials {
 		return math.NaN()
 	}
@@ -28,6 +28,6 @@ func (s BernoulliSample) MLE() float64 {
 }
 
 func (s BernoulliSample) Variance() float64 {
-	p := s.MLE()
+	p := s.Estimator()
 	return (p * (1 - p)) / float64(s.Trials)
 }

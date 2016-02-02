@@ -59,7 +59,7 @@ func TestPairedComparisonMLE(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		actual := tt.in.MLE()
+		actual := tt.in.Estimator()
 		if math.IsNaN(tt.out) {
 			assert.True(t, math.IsNaN(actual))
 		} else {

@@ -1,5 +1,5 @@
-// Package waldo performs basic statistical hypothesis testing for scalar
-// parameter estimates using the Wald test.
+// Package waldo performs basic two-sided statistical hypothesis
+// testing for scalar parameter estimates using the Wald test.
 package waldo
 
 import (
