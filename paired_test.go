@@ -119,7 +119,7 @@ func TestPairedComparisonWaldTest(t *testing.T) {
 	assert.Equal(t, wald.Test(pc), pc.WaldTest(size))
 }
 
-func ExamplePaired_comparison_test() {
+func ExamplePairedComparison_WaldTest() {
 	size := 0.05
 	pc := PairedComparison{
 		X: BernoulliSample{103, 200},
