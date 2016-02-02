@@ -57,8 +57,8 @@ func TestWaldTest(t *testing.T) {
 }
 
 func ExampleWald() {
-	data := BernoulliSample{Successes: 75, Count: 100}
+	data := BernoulliSample{Successes: 35, Count: 40}
 	wald := Wald{Size: 0.05, Null: 0.5}
 	fmt.Printf("%#v", wald.Test(data))
-	// waldo.Result{ConfidenceInterval:[]float64{0.8168459395887369, 0.9831540604112632}, ConfidenceLevel:0.95, Power:0.9999999999999594, PValue:4.176224939330939e-21, RejectNull:true, Statistic:9.428090415820636}fmt.Println(r)
+	// Output: waldo.Result{ConfidenceInterval:[]float64{0.7725112383996421, 0.9774887616003579}, ConfidenceLevel:0.95, Power:0.999999906295462, PValue:7.425001949510999e-13, RejectNull:true, Statistic:7.171371656006362}
 }
