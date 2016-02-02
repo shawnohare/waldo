@@ -11,7 +11,7 @@ import (
 // a slice of data or a count of successes together with the number of trials.
 type BernoulliSample struct {
 	Successes int
-	Count     int
+	Trials    int
 }
 
 // MLE estimate for the underlying success probability.
@@ -21,13 +21,13 @@ type BernoulliSample struct {
 // then the MLE (as a function) is simply (1/m)X, where m is the size
 // of the sample.
 func (s BernoulliSample) MLE() float64 {
-	if s.Count <= 0 || s.Successes < 0 || s.Successes > s.Count {
+	if s.Trials <= 0 || s.Successes < 0 || s.Successes > s.Trials {
 		return math.NaN()
 	}
-	return float64(s.Successes) / float64(s.Count)
+	return float64(s.Successes) / float64(s.Trials)
 }
 
 func (s BernoulliSample) Variance() float64 {
 	p := s.MLE()
-	return (p * (1 - p)) / float64(s.Count)
+	return (p * (1 - p)) / float64(s.Trials)
 }
