@@ -8,6 +8,12 @@ import "math"
 // as well as the sampling distribution's variance.  Recall
 // that the sampling distribution is defined as the distribution of
 // the point estimator.
+//
+// The estimator in question should be
+// asymptotically normal, which is to say that the difference between
+// the estimator (as a random variable of the data size) and the parameter
+// being estimated over the standard error of the estimator converges
+// in distribution to a standard normal distribution.
 type Sample interface {
 	Estimator() float64
 	Variance() float64
