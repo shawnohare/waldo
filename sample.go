@@ -2,9 +2,9 @@ package waldo
 
 import "math"
 
-// Sample represents a sample drawn from some distribution.  To compute
+// Sample represents data drawn from some distribution.  To compute
 // the Wald statistics we need to have a maximum-likelihood estimator
-// function as well as the variance.
+// function as well as the sample variance.
 type Sample interface {
 	// Maximum likelihood estimator evaluated over the sample data.
 	MLE() float64

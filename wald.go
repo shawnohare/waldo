@@ -17,11 +17,15 @@ type Wald struct {
 // Results is a container for the result of performing a Wald
 // test over some sample of data.
 type Result struct {
+	// Confidence interval for the sample parameter estimate computed at
+	// the same level as the size of the test.
 	ConfidenceInterval []float64
-	Power              float64
-	PValue             float64
-	RejectNull         bool
-	Statistic          float64
+	// The confidence level is 1- the size of the Wald test that produced the result.
+	ConfidenceLevel float64
+	Power           float64
+	PValue          float64
+	RejectNull      bool
+	Statistic       float64
 }
 
 // Compute the z_{alpha/2} value associated wit the test.
@@ -68,6 +72,7 @@ func (t Wald) Test(s Sample) Result {
 	return Result{
 		Statistic:          t.Statistic(cs),
 		ConfidenceInterval: t.ConfidenceInterval(cs),
+		ConfidenceLevel:    1 - t.Alpha,
 		Power:              t.Power(cs),
 		PValue:             t.PValue(cs),
 		RejectNull:         t.RejectNull(cs),

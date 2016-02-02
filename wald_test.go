@@ -34,6 +34,7 @@ func TestWaldTest(t *testing.T) {
 				Statistic:          1.0,
 				Power:              1 - stdNormal.Cdf(-1+1.95996) + stdNormal.Cdf(-1-1.95996),
 				ConfidenceInterval: []float64{-0.95996, 2.95996},
+				ConfidenceLevel:    .95,
 				PValue:             2 * stdNormal.Cdf(-1.0),
 				RejectNull:         false,
 			},
