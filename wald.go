@@ -2,6 +2,14 @@ package waldo
 
 import "math"
 
+// ScalarParameterHypothesisTest represents an abstract hypothesis test for
+// a scalar parameter, of which the Wald test is one.
+// This type is introduced in case the waldo package becomes part of
+// a larger class of tests.
+// type ScalarParameterHypothesisTest interface {
+// 	Test(s Sample) Result
+// }
+
 // Wald is a simple two-sided statistical hypothesis test
 // for a scalar parameter theta. It tests
 // H_0: theta = null vs. H_1: theta != null,
