@@ -19,3 +19,10 @@ func (s PairedComparison) Variance() float64 {
 	// V(X - Y) = V(X) + V(-Y) = V(X) + (-1)^2*V(Y)
 	return s.X.Variance() + s.Y.Variance()
 }
+
+// Test performs a Wald test with the input size on the two samples
+// to determine if their parameter estimates are statistically different.
+func (s PairedComparison) WaldTest(size float64) Result {
+	wald := Wald{Size: size}
+	return wald.Test(s)
+}

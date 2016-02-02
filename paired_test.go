@@ -1,6 +1,7 @@
 package waldo
 
 import (
+	"fmt"
 	"math"
 	"testing"
 
@@ -106,4 +107,24 @@ func TestPairedComparisonVariance(t *testing.T) {
 			assert.Equal(t, tt.out, actual)
 		}
 	}
+}
+
+func TestPairedComparisonWaldTest(t *testing.T) {
+	size := 0.05
+	pc := PairedComparison{
+		X: BernoulliSample{103, 200},
+		Y: BernoulliSample{110, 200},
+	}
+	wald := Wald{Size: size}
+	assert.Equal(t, wald.Test(pc), pc.WaldTest(size))
+}
+
+func ExamplePairedComparisonTest() {
+	size := 0.05
+	pc := PairedComparison{
+		X: BernoulliSample{103, 200},
+		Y: BernoulliSample{110, 200},
+	}
+	fmt.Printf("%#v", pc.WaldTest(size))
+	// Output: waldo.Result{ConfidenceInterval:[]float64{-0.1327305906069241, 0.06273059060692406}, ConfidenceLevel:0.95, Power:0.10807314041617873, PValue:0.482731935542819, RejectNull:false, Statistic:-0.7019153324868983}
 }

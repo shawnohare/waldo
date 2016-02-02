@@ -56,7 +56,7 @@ func TestWaldTest(t *testing.T) {
 	}
 }
 
-func ExampleWald() {
+func ExampleWaldTestOnBernoulliSample() {
 	data := BernoulliSample{Successes: 35, Trials: 40}
 	wald := Wald{Size: 0.05, Null: 0.5}
 	fmt.Printf("%#v", wald.Test(data))
