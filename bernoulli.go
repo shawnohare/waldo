@@ -29,8 +29,5 @@ func (s BernoulliSample) MLE() float64 {
 
 func (s BernoulliSample) Variance() float64 {
 	p := s.MLE()
-	if p < 0 {
-		return math.NaN()
-	}
 	return (p * (1 - p)) / float64(s.Count)
 }

@@ -36,19 +36,3 @@ func zalpha2(alpha float64) float64 {
 	// Ppf is the percentile point function, i.e., inverse CDF.
 	return stdNormal.Ppf(1.0 - (alpha / 2.0))
 }
-
-// zalpha2FromConfidence computes the necessary zalpha2 value when it is
-// provided a confdience level in [0, 1].
-func zalpha2FromConfidence(confidence float64) float64 {
-	alpha := 1 - confidence // as confidence = 1 - alpha
-	return zalpha2(alpha)
-}
-
-// Compute the normal confidence interval for the given value
-// of an estimator.  Since the MLE is asymptotically normal, this
-// confidence interval is useful when the estimator is the MLE.
-// Level should be in [0, 1], e.g., 0.95 for a 95% confidence interval.
-func normalConfidenceInterval(estimate, stdError, level float64) []float64 {
-	epsilon := stdError * zalpha2FromConfidence(level)
-	return []float64{estimate - epsilon, estimate + epsilon}
-}
