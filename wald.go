@@ -18,9 +18,9 @@ import "math"
 // maximum likelihood estimator, for instance.
 // A Wald test with Size S has a confidence level of 1 - S.
 type Wald struct {
-	Size float64
-	Null float64
-	zval float64
+	Size      float64
+	NullValue float64
+	zval      float64
 }
 
 // Results is a container for the result of performing a Wald
@@ -35,6 +35,8 @@ type Result struct {
 	PValue          float64
 	RejectNull      bool
 	Statistic       float64
+	Size            float64
+	NullValue       float64
 }
 
 // Compute the z_{alpha/2} value associated wit the test.
@@ -47,7 +49,7 @@ func (t *Wald) z() float64 {
 
 // Statistic computes the test statistic for the sample.
 func (t Wald) Statistic(s Sample) float64 {
-	return (s.Estimator() - t.Null) / StandardError(s)
+	return (s.Estimator() - t.NullValue) / StandardError(s)
 }
 
 func (t Wald) PValue(s Sample) float64 {
@@ -67,7 +69,7 @@ func (t Wald) Power(s Sample) float64 {
 	estimate := s.Estimator()
 	stdError := StandardError(s)
 	z := t.z()
-	x := (t.Null - estimate) / stdError
+	x := (t.NullValue - estimate) / stdError
 	return 1 - stdNormal.Cdf(x+z) + stdNormal.Cdf(x-z)
 }
 
@@ -85,5 +87,7 @@ func (t Wald) Test(s Sample) Result {
 		Power:              t.Power(cs),
 		PValue:             t.PValue(cs),
 		RejectNull:         t.RejectNull(cs),
+		Size:               t.Size,
+		NullValue:          t.NullValue,
 	}
 }

@@ -29,7 +29,7 @@ func TestWaldTest(t *testing.T) {
 		result Result
 	}{
 		{
-			wald:   Wald{Size: 0.05, Null: 0},
+			wald:   Wald{Size: 0.05, NullValue: 0},
 			sample: sample{mle: 1, variance: 1},
 			result: Result{
 				Statistic:          1.0,
@@ -38,6 +38,8 @@ func TestWaldTest(t *testing.T) {
 				ConfidenceLevel:    .95,
 				PValue:             2 * stdNormal.Cdf(-1.0),
 				RejectNull:         false,
+				Size:               0.05,
+				NullValue:          0,
 			},
 		},
 	}
@@ -58,7 +60,7 @@ func TestWaldTest(t *testing.T) {
 
 func ExampleWald_Test_bernoulli() {
 	data := BernoulliSample{Successes: 35, Trials: 40}
-	wald := Wald{Size: 0.05, Null: 0.5}
+	wald := Wald{Size: 0.05, NullValue: 0.5}
 	fmt.Printf("%#v", wald.Test(data))
-	// Output: waldo.Result{ConfidenceInterval:[]float64{0.7725112383996421, 0.9774887616003579}, ConfidenceLevel:0.95, Power:0.999999906295462, PValue:7.425001949510999e-13, RejectNull:true, Statistic:7.171371656006362}
+	// Output: waldo.Result{ConfidenceInterval:[]float64{0.7725112383996421, 0.9774887616003579}, ConfidenceLevel:0.95, Power:0.999999906295462, PValue:7.425001949510999e-13, RejectNull:true, Statistic:7.171371656006362, Size:0.05, NullValue:0.5}
 }

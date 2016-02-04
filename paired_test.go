@@ -137,7 +137,7 @@ func ExamplePairedComparison_WaldTest() {
 	}
 	pc := PairedComparison{Size: size}
 	fmt.Printf("%#v", pc.Test(s))
-	// Output: waldo.Result{ConfidenceInterval:[]float64{-0.1327305906069241, 0.06273059060692406}, ConfidenceLevel:0.95, Power:0.10807314041617873, PValue:0.482731935542819, RejectNull:false, Statistic:-0.7019153324868983}
+	// Output: waldo.Result{ConfidenceInterval:[]float64{-0.1327305906069241, 0.06273059060692406}, ConfidenceLevel:0.95, Power:0.10807314041617873, PValue:0.482731935542819, RejectNull:false, Statistic:-0.7019153324868983, Size:0.05, NullValue:0}
 }
 
 func ExamplePairedComparisonTest() {
@@ -145,5 +145,5 @@ func ExamplePairedComparisonTest() {
 	X := BernoulliSample{103, 200}
 	Y := BernoulliSample{110, 200}
 	fmt.Printf("%#v", PairedComparisonTest(X, Y, size))
-	// Output: waldo.Result{ConfidenceInterval:[]float64{-0.1327305906069241, 0.06273059060692406}, ConfidenceLevel:0.95, Power:0.10807314041617873, PValue:0.482731935542819, RejectNull:false, Statistic:-0.7019153324868983}
+	// Output: waldo.Result{ConfidenceInterval:[]float64{-0.1327305906069241, 0.06273059060692406}, ConfidenceLevel:0.95, Power:0.10807314041617873, PValue:0.482731935542819, RejectNull:false, Statistic:-0.7019153324868983, Size:0.05, NullValue:0}
 }
